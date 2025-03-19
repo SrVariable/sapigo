@@ -6,11 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var (
-	defaultHost = "localhost"
-	defaultPort = "8080"
-	defaultUri  = defaultHost + ":" + defaultPort
-)
+const defaultUri = "localhost:8080"
 
 type student struct {
 	ID   string `json:"id"`
