@@ -37,9 +37,14 @@ func getStudentByID(c *gin.Context) {
 	c.JSON(http.StatusNotFound, gin.H{"message": "student not found"})
 }
 
-func main() {
-	gin.SetMode(gin.ReleaseMode)
+func setupRouter() *gin.Engine {
 	router := gin.Default()
+	return router
+}
+
+func main() {
+	router := setupRouter()
+
 	router.GET("/students", getStudent)
 	router.GET("/students/:id", getStudentByID)
 
