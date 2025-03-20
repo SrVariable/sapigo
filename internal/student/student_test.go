@@ -1,4 +1,4 @@
-package main
+package student
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ func TestGetStudent(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
 
-	getStudent(c)
+	GetStudent(c)
 	assert.Equal(t, http.StatusOK, w.Code)
 
 	want := []student{
@@ -37,7 +37,7 @@ func TestGetStudentByID(t *testing.T) {
 	c, _ := gin.CreateTestContext(w)
 	c.Params = append(c.Params, gin.Param{Key: "id", Value: "2"})
 
-	getStudentByID(c)
+	GetStudentByID(c)
 	assert.Equal(t, http.StatusOK, w.Code)
 
 	want := student{ID: "2", Name: "Ben", Age: 20}
@@ -54,7 +54,7 @@ func TestGetStudentByIDNegative(t *testing.T) {
 	c, _ := gin.CreateTestContext(w)
 	c.Params = append(c.Params, gin.Param{Key: "id", Value: "-1"})
 
-	getStudentByID(c)
+	GetStudentByID(c)
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
 	want := gin.H{"message": "student not found"}
@@ -71,7 +71,7 @@ func TestGetStudentByIDLessThanOne(t *testing.T) {
 	c, _ := gin.CreateTestContext(w)
 	c.Params = append(c.Params, gin.Param{Key: "id", Value: "0"})
 
-	getStudentByID(c)
+	GetStudentByID(c)
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
 	want := gin.H{"message": "student not found"}
@@ -88,7 +88,7 @@ func TestGetStudentByIDGreaterThanFive(t *testing.T) {
 	c, _ := gin.CreateTestContext(w)
 	c.Params = append(c.Params, gin.Param{Key: "id", Value: "6"})
 
-	getStudentByID(c)
+	GetStudentByID(c)
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
 	want := gin.H{"message": "student not found"}
@@ -105,7 +105,7 @@ func TestGetStudentByIDNotNumber(t *testing.T) {
 	c, _ := gin.CreateTestContext(w)
 	c.Params = append(c.Params, gin.Param{Key: "id", Value: "a"})
 
-	getStudentByID(c)
+	GetStudentByID(c)
 	assert.Equal(t, http.StatusNotFound, w.Code)
 
 	want := gin.H{"message": "student not found"}
