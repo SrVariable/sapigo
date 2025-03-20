@@ -9,6 +9,6 @@ import (
 func addStudentRoutes(rg *gin.RouterGroup) {
 	students := rg.Group("/students")
 
-	students.GET("/", student.GetStudent)
-	students.GET("/:id", student.GetStudentByID)
+	students.GET("/", student.GetStudentsHandler)
+	students.GET("/:id", student.GetStudentByIDHandler)
 }
